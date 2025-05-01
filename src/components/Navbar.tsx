@@ -85,9 +85,9 @@ const Navbar = () => {
                 </Link>
               ))}
               <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="bg-gradient-to-r from-neuro-purple to-neuro-teal hover:opacity-90 transition-opacity w-full">
-                  Join the Beta
-                </Button>
+              <Button className="bg-gradient-to-r from-neuro-purple to-neuro-teal hover:opacity-90 transition-opacity w-full">
+                Join the Beta
+              </Button>
               </Link>
             </nav>
           </div>

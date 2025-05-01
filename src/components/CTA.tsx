@@ -29,9 +29,9 @@ const CTA: React.FC<CTAProps> = ({
             <p className="text-lg text-foreground/70 mb-8">{subtitle}</p>
           )}
           <Link to="/signup">
-            <Button className="bg-gradient-to-r from-neuro-purple to-neuro-teal hover:opacity-90 transition-opacity px-8 py-6 h-auto text-lg shadow-neuro hover:shadow-neuro-glow">
-              {buttonText}
-            </Button>
+          <Button className="bg-gradient-to-r from-neuro-purple to-neuro-teal hover:opacity-90 transition-opacity px-8 py-6 h-auto text-lg shadow-neuro hover:shadow-neuro-glow">
+            {buttonText}
+          </Button>
           </Link>
         </div>
       </div>

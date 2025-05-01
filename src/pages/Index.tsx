@@ -38,9 +38,9 @@ const Index = () => {
             <AnimatedElement delay={200}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/signup">
-                  <Button className="bg-gradient-to-r from-neuro-purple to-neuro-teal hover:opacity-90 transition-opacity px-8 py-6 h-auto text-lg">
-                    Join the Beta
-                  </Button>
+                <Button className="bg-gradient-to-r from-neuro-purple to-neuro-teal hover:opacity-90 transition-opacity px-8 py-6 h-auto text-lg">
+                  Join the Beta
+                </Button>
                 </Link>
                 <Button variant="outline" className="border-neuro-purple text-foreground px-8 py-6 h-auto text-lg">
                   <Link to="/how-it-works">Learn More</Link>
