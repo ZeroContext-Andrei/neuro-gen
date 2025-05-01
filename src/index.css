@@ -1,0 +1,368 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 15% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 228 20% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 228 20% 13%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 255 80% 74%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 220 25% 20%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 25% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 220 25% 20%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 27% 18%;
+    --input: 215 27% 18%;
+    --ring: 255 50% 70%;
+
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border selection:bg-neuro-purple/20 selection:text-white;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      rgba(155, 135, 245, 0.03) 0%,
+      rgba(0, 0, 0, 0) 70%
+    );
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-neuro-purple to-neuro-teal text-transparent bg-clip-text;
+  }
+
+  .glass-nav {
+    @apply bg-neuro-dark/30 backdrop-blur-xl border-b border-white/5 shadow-md;
+  }
+
+  .glass-card {
+    @apply bg-card/40 backdrop-blur-md border border-white/5 rounded-xl shadow-md hover:shadow-neuro-glow transition-all duration-300;
+  }
+
+  .glass-light {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .neural-glow {
+    @apply animate-glow;
+  }
+
+  /* Section styling */
+  .section {
+    @apply relative overflow-hidden py-16 md:py-24;
+  }
+  
+  /* Section backgrounds */
+  .section-dark {
+    @apply bg-neuro-dark;
+  }
+  
+  .section-charcoal {
+    @apply bg-neuro-charcoal;
+  }
+  
+  /* Gradient overlays */
+  .section-gradient {
+    position: relative;
+  }
+  
+  .section-gradient::before,
+  .section-gradient::after {
+    content: '';
+    @apply absolute left-0 right-0 z-10 h-32 pointer-events-none;
+  }
+  
+  .section-gradient::before {
+    @apply top-0;
+    background: linear-gradient(to bottom, var(--top-color, rgba(18, 21, 30, 1)) 0%, transparent 100%);
+  }
+  
+  .section-gradient::after {
+    @apply bottom-0;
+    background: linear-gradient(to top, var(--bottom-color, rgba(18, 21, 30, 1)) 0%, transparent 100%);
+  }
+  
+  /* Section color combinations */
+  .dark-to-dark {
+    --top-color: rgba(18, 21, 30, 0.99);
+    --bottom-color: rgba(18, 21, 30, 0.99);
+    @apply bg-neuro-dark;
+  }
+  
+  .dark-to-charcoal {
+    --top-color: rgba(18, 21, 30, 0.99);
+    --bottom-color: rgba(29, 34, 53, 0.99);
+    background: linear-gradient(180deg, rgba(18, 21, 30, 1) 0%, rgba(29, 34, 53, 1) 100%);
+  }
+  
+  .charcoal-to-dark {
+    --top-color: rgba(29, 34, 53, 0.99);
+    --bottom-color: rgba(18, 21, 30, 0.99);
+    background: linear-gradient(180deg, rgba(29, 34, 53, 1) 0%, rgba(18, 21, 30, 1) 100%);
+  }
+  
+  .charcoal-to-charcoal {
+    --top-color: rgba(29, 34, 53, 0.99);
+    --bottom-color: rgba(29, 34, 53, 0.99);
+    @apply bg-neuro-charcoal;
+  }
+  
+  /* Special gradients without visible break */
+  .dark-to-dark-seamless {
+    --top-color: transparent;
+    --bottom-color: transparent;
+    @apply bg-neuro-dark;
+  }
+  
+  .dark-to-charcoal-seamless {
+    --top-color: transparent;
+    --bottom-color: rgba(29, 34, 53, 0.99);
+    background: linear-gradient(180deg, rgba(18, 21, 30, 1) 30%, rgba(29, 34, 53, 1) 100%);
+    border-top: none;
+    margin-top: -1px; /* Remove any potential gap */
+  }
+
+  /* Page Transition animations */
+  .page-transition-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; 
+    overflow-x: hidden;
+  }
+
+  .page-transition-wrapper {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* Enter Animations */
+  .page-enter {
+    opacity: 0;
+    transform: translate3d(0, 15px, 0);
+    z-index: 1;
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms,
+                transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms;
+    z-index: 1;
+  }
+
+  /* Exit Animations */
+  .page-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  .page-exit-active {
+    opacity: 0;
+    transform: translate3d(0, -15px, 0);
+    transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1) 200ms,
+                transform 500ms cubic-bezier(0.16, 1, 0.3, 1) 200ms;
+    z-index: 0;
+  }
+
+  /* Enhanced Animation System */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .slide-from-left {
+    transform: translateX(-100px);
+  }
+
+  .slide-from-right {
+    transform: translateX(100px);
+  }
+
+  .slide-from-top {
+    transform: translateY(-100px);
+  }
+
+  .slide-from-bottom {
+    transform: translateY(100px);
+  }
+
+  /* Exit animations for elements */
+  .exit-to-left {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-100px) !important;
+    opacity: 0 !important;
+  }
+
+  .exit-to-right {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(100px) !important;
+    opacity: 0 !important;
+  }
+
+  .exit-to-top {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(-100px) !important;
+    opacity: 0 !important;
+  }
+
+  .exit-to-bottom {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(100px) !important;
+    opacity: 0 !important;
+  }
+
+  /* Animations */
+  .slide-in-left {
+    animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .slide-in-up {
+    animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInUp {
+    from {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Utility animations for hover */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(155, 135, 245, 0.1);
+  }
+  
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 15px rgba(155, 135, 245, 0.3);
+  }
+  
+  .link-hover {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  /* Delay utilities */
+  .delay-100 {
+    transition-delay: 100ms !important;
+    animation-delay: 100ms !important;
+  }
+  
+  .delay-200 {
+    transition-delay: 200ms !important;
+    animation-delay: 200ms !important;
+  }
+  
+  .delay-300 {
+    transition-delay: 300ms !important;
+    animation-delay: 300ms !important;
+  }
+  
+  .delay-400 {
+    transition-delay: 400ms !important;
+    animation-delay: 400ms !important;
+  }
+  
+  .delay-500 {
+    transition-delay: 500ms !important;
+    animation-delay: 500ms !important;
+  }
+}
